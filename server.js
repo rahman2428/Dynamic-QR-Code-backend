@@ -14,8 +14,10 @@ connectDB();
 
 // Security middleware
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
+
+const clientUrl = (process.env.CLIENT_URL || 'http://localhost:5173').replace(/\/$/, '');
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: [clientUrl, 'http://localhost:5173', 'http://localhost:5174'],
   credentials: true
 }));
 
